@@ -21,3 +21,6 @@
 
 !wrongsong
 -Deletes last song user requested
+
+~~~ Note ~~~
+Not all commands work right now...
