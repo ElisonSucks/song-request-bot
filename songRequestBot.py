@@ -28,7 +28,17 @@ def request(user, msg):
         sendMsg("@" + user + " requested " + msg[5:(len(msg))] + "!")
         songList.append([user,msg[5:]])
         songListName.append(user)
-                
+
+def showRequestList():
+    if len(songList) == 0:
+        sendMsg("There are no requests...")
+    else:
+        temp = ""
+        for i in range(len(songList)):
+            temp = temp + "@" + songList[i][0] + " requested " + songList[i][1] + "! "
+
+        sendMsg(temp)
+
 def chatPriv(user, msg):
     global moderators
 
@@ -38,12 +48,30 @@ def chatPriv(user, msg):
         commands(user, msg, 0)
 
 def commands(user, msg, priv):
+    def chatMods(msg):
+        if msg == "!delclear":
+            global songList
+            global songListName
+            songList = []
+            songListName = []
+            sendMsg("Request list cleared...")
+
+        if msg[0:8] == "!delreq ":
+            msgTemp = int(msg[8:(len(msg))])
+            if msgTemp > len(songList):
+                sendMsg("That is not a possible command argument...")
+            else:
+                songList.remove(int(msgTemp))
+
     def chatCommands(user, msg):
         if msg[0:6] == "!song ":
             request(user, msg)
 
+        if msg == "!songlist":
+            showRequestList()
+
     if priv == 1:
-        print('mod')
+        chatMods(msg)
         chatCommands(user,msg)
     else:
         chatCommands(user,msg)
@@ -72,4 +100,3 @@ while True:
         username = (parts[1].split("!"))[0]
         if message[0] == "!":
             chatPriv(username, message)
-        
