@@ -1,0 +1,23 @@
+~~ Moderator Commands ~~
+!delreq <number>
+- Deletes request number <number>
+
+!dellast
+- Deletes first request
+- Do this if you just played a song and want to remove it from the list
+
+!delclear
+- Deletes all requests
+
+~~ Regular Commands ~~
+!song <link>
+- Requests a song
+
+!songlist
+- Shows list of songs requested
+
+!currentsong
+- Shows song that is being played or should be played
+
+!wrongsong
+-Deletes last song user requested
